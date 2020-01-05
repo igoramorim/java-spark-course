@@ -10,6 +10,8 @@ import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 
+import com.google.common.collect.Iterables;
+
 import scala.Tuple2;
 
 public class MainPairRDD {
@@ -28,20 +30,35 @@ public class MainPairRDD {
 		SparkConf conf = new SparkConf().setAppName("startingSpark").setMaster("local[*]");
 		JavaSparkContext sc = new JavaSparkContext(conf);
 		
-		JavaRDD<String> originalLogMessages = sc.parallelize(inputData);
+		// normal method
+//		JavaRDD<String> originalLogMessages = sc.parallelize(inputData);
+//		
+//		JavaPairRDD<String, Long> pairRdd = originalLogMessages.mapToPair(rawValue -> {
+//			String[] columns = rawValue.split(":");
+//			String level = columns[0];
+//			
+//			return new Tuple2<>(level, 1L);
+//		});
+//		
+//		JavaPairRDD<String, Long> sumRdd = pairRdd.reduceByKey((v1, v2) -> v1 + v2);
+//		
+//		sumRdd.collect().forEach((tuple -> {
+//			System.out.println(tuple._1 + " has " + tuple._2 + " instances");
+//		}));
 		
-		JavaPairRDD<String, Long> pairRdd = originalLogMessages.mapToPair(rawValue -> {
-			String[] columns = rawValue.split(":");
-			String level = columns[0];
-			
-			return new Tuple2<>(level, 1L);
-		});
 		
-		JavaPairRDD<String, Long> sumRdd = pairRdd.reduceByKey((v1, v2) -> v1 + v2);
+		// fluent method
+		sc.parallelize(inputData)
+		  .mapToPair(rawValue -> new Tuple2<>(rawValue.split(":")[0], 1L))
+		  .reduceByKey((v1, v2) -> v1 + v2)
+		  .foreach(tuple -> System.out.println(tuple._1 + " has " + tuple._2 + " instances"));
 		
-		sumRdd.collect().forEach((tuple -> {
-			System.out.println(tuple._1 + " has " + tuple._2 + " instances");
-		}));
+		// groupByKey version
+		// groupByKey has performance issues in large datasets
+//		sc.parallelize(inputData)
+//		  .mapToPair(rawValue -> new Tuple2<>(rawValue.split(":")[0], 1L))
+//		  .groupByKey()
+//		  .foreach(tuple -> System.out.println(tuple._1 + " has " + Iterables.size(tuple._2) + " instances"));
 		
 		sc.close();
 		
