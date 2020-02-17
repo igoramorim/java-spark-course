@@ -1,0 +1,7 @@
+WARN Tuesday 4 September 0405
+WARN Saturday 8 September 1942
+WARN Saturday 10 September 1942
+ERROR Tuesday 4 September 0408
+ERROR Friday 7 September 1854
+ERROR Friday 7 October 1854
+FATAL Wednesday 5 September 1632
