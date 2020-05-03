@@ -1,0 +1,125 @@
+{
+    "report": "APARGP",
+    "lines": [
+        {
+            "type": "T0",
+            "fields": [
+                {
+                    "description": "type",
+                    "position": 0,
+                    "size": 3,
+                    "pad": "left",
+                    "fill": "*"
+                },
+                {
+                    "description": "id",
+                    "position": 1,
+                    "size": 10,
+                    "pad": "left",
+                    "fill": "0"
+                },
+                {
+                    "description": "nome",
+                    "position": 2,
+                    "size": 20,
+                    "pad": "left",
+                    "fill": "-"
+                },
+                {
+                    "description": "idade",
+                    "position": 3,
+                    "size": 3,
+                    "pad": "right",
+                    "fill": " "
+                },
+                {
+                    "description": "sobrenome",
+                    "position": 4,
+                    "size": 20,
+                    "pad": "left",
+                    "fill": "-"
+                }
+            ]
+        },
+        {
+            "type": "T1",
+            "fields": [
+                {
+                    "description": "type",
+                    "position": 0,
+                    "size": 3,
+                    "pad": "right",
+                    "fill": "-"
+                },
+                {
+                    "description": "id",
+                    "position": 1,
+                    "size": 10,
+                    "pad": "right",
+                    "fill": "*"
+                },
+                {
+                    "description": "nome",
+                    "position": 2,
+                    "size": 20,
+                    "pad": "left",
+                    "fill": "_"
+                },
+                {
+                    "description": "idade",
+                    "position": 3,
+                    "size": 3,
+                    "pad": "right",
+                    "fill": " "
+                },
+                {
+                    "description": "sobrenome",
+                    "position": 4,
+                    "size": 20,
+                    "pad": "left",
+                    "fill": "-"
+                }
+            ]
+        },
+        {
+            "type": "T2",
+            "fields": [
+                {
+                    "description": "type",
+                    "position": 0,
+                    "size": 3,
+                    "pad": "right",
+                    "fill": "-"
+                },
+                {
+                    "description": "id",
+                    "position": 1,
+                    "size": 10,
+                    "pad": "right",
+                    "fill": "*"
+                },
+                {
+                    "description": "nome",
+                    "position": 2,
+                    "size": 20,
+                    "pad": "left",
+                    "fill": "_"
+                },
+                {
+                    "description": "idade",
+                    "position": 3,
+                    "size": 3,
+                    "pad": "right",
+                    "fill": " "
+                },
+                {
+                    "description": "sobrenome",
+                    "position": 4,
+                    "size": 20,
+                    "pad": "left",
+                    "fill": "-"
+                }
+            ]
+        }
+    ]
+}
