@@ -31,7 +31,4 @@ public class Layout {
 	public String toString() {
 		return "Layout [report=" + report + ", lines=" + lines + "]";
 	}
-
-	
-	
 }

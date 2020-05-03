@@ -26,5 +26,10 @@ public class Line {
 	public void setFields(List<Field> fields) {
 		this.fields = fields;
 	}
+
+	@Override
+	public String toString() {
+		return "Line [type=" + type + ", fields=" + fields + "]";
+	}
 	
 }

@@ -44,5 +44,10 @@ public class Field {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Field [position=" + position + ", description=" + description + ", size=" + size + ", pad=" + pad
+				+ ", fill=" + fill + "]";
+	}
 }

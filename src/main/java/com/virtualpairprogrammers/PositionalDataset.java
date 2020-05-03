@@ -69,18 +69,18 @@ public class PositionalDataset {
 	private static Function<String, String> formatLine = line -> {
 		String[] values = line.split(",");
 		// Put it in another method
-		String[] lineValues = Arrays.stream(values).filter(x -> StringUtils.isNotEmpty(x)).toArray(String[]::new);
-		// Put it in another method
 		Line lineLayout = layout.getLines().stream()
-			.filter(x -> lineValues[0].equalsIgnoreCase(x.getType()))
-			.collect(Collectors.toList())
-			.get(0);
+				.filter(x -> values[0].equalsIgnoreCase(x.getType()))
+				.collect(Collectors.toList())
+				.get(0);
+		// Put it in another method
+		String[] lineValues = Arrays.stream(values).filter(x -> StringUtils.isNotEmpty(x)).toArray(String[]::new);
 		
 		for (int i = 0; i < lineValues.length; i++) {
 			if (lineLayout.getFields().get(i).getPad().equalsIgnoreCase("left")) {
 				lineValues[i] = StringUtils.leftPad(
 						lineValues[i], lineLayout.getFields().get(i).getSize(), lineLayout.getFields().get(i).getFill());
-			} else {
+			} else if (lineLayout.getFields().get(i).getPad().equalsIgnoreCase("right")) {
 				lineValues[i] = StringUtils.rightPad(
 						lineValues[i], lineLayout.getFields().get(i).getSize(), lineLayout.getFields().get(i).getFill());
 			}
@@ -121,13 +121,16 @@ public class PositionalDataset {
 	private static Dataset<Row> getDatasetFromTxt(SparkSession spark) {
 	Dataset<Row> dataset = spark.read()
 				.format("csv")
-				.option("delimiter", ",")
-				.load("src/main/resources/positionaldataset/input.txt");
+				.option("delimiter", ";")
+//				.load("src/main/resources/positionaldataset/input.txt");
+				.option("header", "true")
+				.load("src/main/resources/positionaldataset/ex1.txt");
 		return dataset;
 	}
 	
 	private static Layout loadLayout() throws JsonParseException, JsonMappingException, IOException {
-		InputStream input = Layout.class.getClassLoader().getResourceAsStream("positionaldataset/layout.json");
+//		InputStream input = Layout.class.getClassLoader().getResourceAsStream("positionaldataset/layout.json");
+		InputStream input = Layout.class.getClassLoader().getResourceAsStream("positionaldataset/layout-ex1.json");
 		ObjectMapper mapper = new ObjectMapper();
 //		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		Layout layout = mapper.readValue(input, Layout.class);
