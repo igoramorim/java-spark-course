@@ -39,6 +39,10 @@ public class PositionalDataset {
 	public static void main(String[] args) throws JsonParseException, JsonMappingException, IOException {
 
 		Logger.getLogger("org.apache").setLevel(Level.WARN);
+		
+		System.setProperty("hadoop.home.dir", "C:/Users/RE.03964/hadoop");
+		System.setProperty("spark.sql.warehouse.dir", "file:///C:/Users/RE.03964/workspace/java-spark-course/spark-warehouse");
+		
 		SparkConf conf = new SparkConf().setAppName("startingSpark").setMaster("local[*]");
 		JavaSparkContext sc = new JavaSparkContext(conf);
 		SparkSession spark = SparkSession.builder().appName("PositionalDataset").getOrCreate();
@@ -124,7 +128,8 @@ public class PositionalDataset {
 				.option("delimiter", ";")
 //				.load("src/main/resources/positionaldataset/input.txt");
 				.option("header", "true")
-				.load("src/main/resources/positionaldataset/ex1.txt");
+				// .load("src/main/resources/positionaldataset/ex1.txt"); // linux
+				.load("C:/Users/RE.03964/workspace/java-spark-course/src/main/resources/positionaldataset/ex1.txt");
 		return dataset;
 	}
 	
